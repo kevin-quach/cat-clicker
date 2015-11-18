@@ -1,8 +1,8 @@
 $(document).ready(function() {
 	loadGame();
+	startProgressBars();
 
 	window.setInterval(function(){
-		upgradeTicks();
 		saveGame();
 	}, 1000); 
 });
@@ -14,8 +14,10 @@ var upgrades = [
 		num: 0,
 		value: 1,
 		cost: 10,
+		timer: 2000,
 		numSelector: "#yarnBallNum",
-		costSelector: "#yarnBallCost"
+		costSelector: "#yarnBallCost",
+		progressSelector: "#yarnBallProgress"
 	}
 ];
 
@@ -41,15 +43,31 @@ function buyUpgrade(upgrade){
     }
 }
 
-function upgradeTicks() {
-	var total = 0; 
-	for(var i = 0; i < upgrades.length; i++) {
-		total += upgrades[i].value * upgrades[i].num
-	}
-	cookieClick(total);
 
+function startProgressBars() {
+	for(var i = 0; i < upgrades.length; i++) {
+		if (upgrades[i].num > 0) {
+			animateProgressBar(upgrades[i]);
+		}
+	}
 }
 
+function animateProgressBar(obj) {
+	console.log(obj.timer);
+	window.setInterval(function() {		
+		$(obj.progressSelector).animate({
+			'width': "100%",
+		}, obj.timer, 'linear', function() {
+			cookieClick(obj.num * obj.value);
+			$(obj.progressSelector).css("width", "0");
+			animateProgressBar(obj);
+		});
+		
+	}, obj.timer);
+	
+	
+	
+}
 function findUpgrade(str) {
 	var obj = {
 		pos: 0,

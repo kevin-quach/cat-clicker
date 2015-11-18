@@ -1,3 +1,11 @@
+.panel .panel-heading {
+  overflow: auto; }
+  .panel .panel-heading strong {
+    line-height: 32px; }
 
+.progress {
+  margin: 0; }
+  .progress .progress-bar {
+    transition: all 0s linear; }
 
 /*# sourceMappingURL=cat.css.map */

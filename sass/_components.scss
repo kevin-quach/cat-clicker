@@ -1,0 +1,15 @@
+.panel {
+	.panel-heading {
+		strong {
+			line-height: 32px;
+		}
+		overflow: auto;
+	}
+}
+
+.progress {
+	margin: 0;
+	.progress-bar {
+		transition: all 0s linear;
+	}
+}
