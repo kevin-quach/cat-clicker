@@ -1,0 +1,55 @@
+<html>
+<head>
+	<title>Cat Clicker</title>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/cat.css">
+</head>
+<body>
+	<div id="wrapper">
+		<header>
+			<div class="container">
+				<h1 class="cat-title">Cat Clicker</h1>
+			</div>
+		</header>
+		<main id="body">
+
+			<div class="container">
+				<div class="container-inner">
+					<div class="row">
+						<div class="col-md-4">
+							<a class="btn btn-primary btn-block" id="cat" onClick="cookieClick(1)" href="#">Pet Cat</a>
+						</div>
+						<div class="col-md-4 col-md-offset-4">
+							<h3>Cats</h3>
+							<h1 id="catCounter">0</h1>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-4">
+							<h3>Upgrades</h3>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<strong>Yarn Balls x <span id="yarnBallNum">0</span></strong>
+								</div>
+								<div class="panel-body">
+							
+									<a class="btn btn-success" id="cat" onClick="buyUpgrade('yarnBall')" href="#">Cats <span id="yarnBallCost">10</span></a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-md-offset-4">
+							
+						</div>
+				</div>
+			</div>
+
+		</main>
+
+	</div>
+
+</body>
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+</html>
