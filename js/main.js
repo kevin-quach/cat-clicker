@@ -32,20 +32,27 @@ GatherResources.prototype = {
 
   //Toggle User Assisted Resource Gathering
   toggle: function(bool) {
-    if(!bool) this.active = false;
-    else this.active = true;
+    if(bool) this.active = true;
+    else this.active = false;
     this.increment();
   },
 
   //Increment Resources per tick
   increment: function() {
-    this.resource.cur += this.resource.getRate(this.active);
+    var limit = this.resource.getLimit();
+    var newValue = this.resource.cur + this.resource.getRate(this.active);
+    if(newValue < limit) {
+      this.resource.cur += this.resource.getRate(this.active);
+    } else {
+      this.resource.cur = this.resource.getLimit();
+    }
     this.update(this.resource);
   },
 
   //Update the resource labels with the newest values
   update: function() {
-    this.target.find(".resource-rate").text(this.resource.getRate(this.active).toFixed(2) + "/sec");
+    if(this.resource.cur == this.resource.getLimit()) this.target.find(".resource-rate").text("");
+    else this.target.find(".resource-rate").text(this.resource.getRate(this.active).toFixed(2) + "/sec");
     this.target.find(".resource-capacity").text(Math.floor(this.resource.cur) + "/" + this.resource.getLimit());
     this.target.find(".resource-bar").css("width", (this.resource.cur / this.resource.getLimit())*100 + "%")
     this.target.find(".resource-time").html(this.calculateTime(this.resource.getRate(this.active),this.resource.cur,this.resource.getLimit()));
@@ -61,8 +68,9 @@ GatherResources.prototype = {
 
   //Calculate the time till resource is full
   calculateTime: function(rate,cur,max) {
+    if (cur == max) return "Full";
   	if (rate == 0) return "Infinity";
-  	var diff     = (max - cur) / rate,
+      	var diff     = (max - cur) / rate,
   			days     = Math.floor(diff/86400),
   			hours    = Math.floor((diff % 86400) / 3600),
   			minutes  = Math.floor(((diff % 86400) % 3600) / 60),
@@ -145,9 +153,9 @@ var gameDefaults = {
 
 
   var resources = [
-    new gatherResources($("#food")),
-    new gatherResources($("#fish")),
-    new gatherResources($("#herb"))
+    new GatherResources($("#food")),
+    new GatherResources($("#fish")),
+    new GatherResources($("#herb"))
   ];
 
 

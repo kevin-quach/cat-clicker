@@ -1,18 +1,17 @@
 .panel {
 	border-radius: 6px;
 	border: none;
-	
-	
 	overflow: auto;
+	position: relative;
 }
 
 .progress {
-	margin: 0;
+	margin: $gutter 0 $gutter 0;
 	text-align: right;
 	width: 100%;
 	border-radius: 30px;
 	background: $bg;
-
+	float: left;
 	.progress-bar {
 		transition: all 0s linear;
 		border-top-right-radius: 30px;
@@ -23,9 +22,8 @@
 }
 
 .resource-btn {
-	width: 100px;
+	width: 80px;
 	text-align: center;
-	margin-bottom: 12px;
 	&.toggled {
 		background: $gray;
 		color: $dark-gray;
@@ -33,14 +31,35 @@
 		pointer-events: none;
 	}
 }
+//Cat Container
+.cat-wrapper {
+	margin: $gutter*1.25 0;
+	padding: 0;
+	width: 100%;
+	float: left;
+	.cat-container {
+		width: calc(100% / 3);
+		float: left;
+		display: block;
+		.cat-avatar {
+			width: 50px;
+			height: 50px;
+			display: block;
+			border-radius: 50%;
+			background: $bg;
+			margin: 0 auto;
+		}
+	}
+}
 
+
+//Resources
 .resource-title {
 	line-height: 0;
 	font-size: 1.25em;
 	position: relative;
 	top: 12px;
 }
-
 .resource-rate {
 	padding-right: 6px;
 	font-size: .9em;
@@ -48,16 +67,23 @@
 	font-weight: 700;
 	line-height: 20px;
 	position: absolute;
-	right: 30px;
+	right: $gutter*1.5;
 }
-
 .resource-capacity {
 	font-weight: 700;
 	letter-spacing: 1px;
+	position: absolute;
+	bottom: $gutter/2;
+	left: $gutter;
 }
 .resource-time {
 	font-size: .85em;
 	padding-top: 3px;
 	position: absolute;
-	right: $gutter*2;
+	bottom: $gutter/2;
+	right: $gutter;
+	strong {
+		margin: 0 -2px 0 3px;
+		letter-spacing: 1px;
+	}
 }
