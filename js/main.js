@@ -1,91 +1,67 @@
-
-$(document).ready(function() {
-  var resources = [
-    new generateResources($("#food")),
-    new generateResources($("#fish")),
-    new generateResources($("#herb"))
-  ];
-
-
-	$(".resource-btn").on("click", function() {
-    $(this).addClass("toggled");
-    $(this).text("Gathering");
-    $(this).parent().parent(".panel").siblings().find(".resource-btn").removeClass("toggled");
-    $(this).parent().parent(".panel").siblings().find(".resource-btn").text("Gather");
-    for(var i = 0; i < resources.length; i++) {
-      if($(this).parent().parent(".panel").attr("id") == resources[i].id) {
-        resources[i].toggle(true);
-        continue;
-      }
-      resources[i].toggle(false);
-    }
-	});
-
-
-
-
-
-
-});
-
- 
-
-
- /* ============================================
-RESOURCES
+/* ============================================
+GATHER RESOURCES
 ============================================ */
-var generateResources  = function(target) {
+var GatherResources  = function(target) {
+
+  //HTML JQuery Selector
   this.target          = $(target);
+
+  //Full Game Data (will reduce this to just the resource object in the future)
   this.data            = $.extend({}, gameDefaults);
-  this.resource        = this.resource(this.target);
+
+  //The targeted resource
+  this.resource        = this.getResource(this.target);
+
+  //Is the resource user active or not
   this.active          = false;
+
+  //Target ID
   this.id              = this.resource.id;
+
+  //Let's go!
   this.init();
 }
 
-//API extension to the buildPieGraph function
-generateResources.prototype = {
+GatherResources.prototype = {
+
+  //Initialize Game Increments
   init: function() {
     var self = this;
-    window.setInterval(function() { self.increment(); }, 1000);  
+    window.setInterval(function() { self.increment(); }, 1000); //1 tick = 1 second
   },
+
+  //Toggle User Assisted Resource Gathering
   toggle: function(bool) {
-    if(!bool) {
-      this.active = false;
-    } else {
-      this.active = true;
-    }
+    if(!bool) this.active = false;
+    else this.active = true;
     this.increment();
   },
+
+  //Increment Resources per tick
   increment: function() {
     this.resource.cur += this.resource.getRate(this.active);
-    console.log(this.resource.cur);
     this.update(this.resource);
   },
-  build: function() {
 
+  //Update the resource labels with the newest values
+  update: function() {
+    this.target.find(".resource-rate").text(this.resource.getRate(this.active).toFixed(2) + "/sec");
+    this.target.find(".resource-capacity").text(Math.floor(this.resource.cur) + "/" + this.resource.getLimit());
+    this.target.find(".resource-bar").css("width", (this.resource.cur / this.resource.getLimit())*100 + "%")
+    this.target.find(".resource-time").html(this.calculateTime(this.resource.getRate(this.active),this.resource.cur,this.resource.getLimit()));
   },
-  resource: function(target) {
-    var res = target.attr("data-resource");
+
+  //Get the targeted resource from the default values
+  getResource: function(target) {
     for(var i = 0; i < this.data.resources.length; i++) {
-      if(res == this.data.resources[i].name) {
-        return this.data.resources[i];
-      }
+      if(target.attr("data-resource") == this.data.resources[i].name) return this.data.resources[i];
     }
     return false;
   },
-  update: function() {
-    var time = this.calculateTime(this.resource.getRate(this.active),this.resource.cur,this.resource.getLimit());
-    var target = this.target;
-    target.find(".resource-title").text(this.resource.name);
-    target.find(".resource-rate").text(this.resource.getRate(this.active).toFixed(2) + "/sec");
-    target.find(".resource-capacity").text(Math.floor(this.resource.cur) + "/" + this.resource.getLimit());
-    target.find(".resource-bar").css("width", (this.resource.cur / this.resource.getLimit())*100)
-    target.find(".resource-time").html(time);
-  },
+
+  //Calculate the time till resource is full
   calculateTime: function(rate,cur,max) {
   	if (rate == 0) return "Infinity";
-
   	var diff     = (max - cur) / rate,
   			days     = Math.floor(diff/86400),
   			hours    = Math.floor((diff % 86400) / 3600),
@@ -94,7 +70,6 @@ generateResources.prototype = {
   			time     = [days,hours,minutes,seconds],
   			measures = ["Days", "Hours", "Mins", "Secs"],
   			duration = "";
-
 		for(var i = 0; i < time.length; i++) {
   		if(time[i] == 0) continue;
   		else duration += "<strong>" + time[i] + "</strong> " + measures[i] + " ";
@@ -102,12 +77,12 @@ generateResources.prototype = {
   	return duration;
   }
 
-
-
-
 };
 
 
+/* ============================================
+RESOURCES
+============================================ */
 var Resource = function(obj) {
   this.id    = obj.id;
   this.name  = obj.name;
@@ -127,6 +102,9 @@ Resource.prototype = {
 }
 
 
+/* ============================================
+ZONES
+============================================ */
 var Zone = function(obj) {
   this.id    = obj.id;
   this.name  = obj.name;
@@ -142,7 +120,9 @@ Zone.prototype = {
 
 
 
-//Default settings
+/* ============================================
+GAME DEFAULTS
+============================================ */
 var gameDefaults = {
 	user: {
 		rate: 1,
@@ -159,4 +139,32 @@ var gameDefaults = {
   cats: []
 }
 
-console.info(gameDefaults.resources[2].getLimit());
+
+
+
+
+
+  var resources = [
+    new gatherResources($("#food")),
+    new gatherResources($("#fish")),
+    new gatherResources($("#herb"))
+  ];
+
+
+  $(".resource-btn").on("click", function() {
+    if($(this).hasClass("toggled")) return false;
+    $(this).addClass("toggled");
+    $(this).text("Gathering");
+    $(this).parent().parent(".panel").siblings().find(".resource-btn").removeClass("toggled");
+    $(this).parent().parent(".panel").siblings().find(".resource-btn").text("Gather");
+    for(var i = 0; i < resources.length; i++) {
+      if($(this).parent().parent(".panel").attr("id") == resources[i].id) {
+        resources[i].toggle(true);
+        continue;
+      }
+      resources[i].toggle(false);
+    }
+  });
+
+
+
