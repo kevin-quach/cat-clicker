@@ -1,11 +1,59 @@
-.panel .panel-heading {
+body {
+  background: #E4E8EA; }
+
+.btn {
+  border: none; }
+
+.panel {
+  border-radius: 6px;
+  border: none;
   overflow: auto; }
-  .panel .panel-heading strong {
-    line-height: 32px; }
 
 .progress {
-  margin: 0; }
+  margin: 0;
+  text-align: right;
+  width: 100%;
+  border-radius: 30px;
+  background: #E4E8EA; }
   .progress .progress-bar {
-    transition: all 0s linear; }
+    transition: all 0s linear;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    box-shadow: none; }
+
+.resource-btn {
+  width: 100px;
+  text-align: center;
+  margin-bottom: 12px; }
+  .resource-btn.toggled {
+    background: #E4E8EA;
+    color: #abb7bd;
+    box-shadow: none;
+    pointer-events: none; }
+
+.resource-title {
+  line-height: 0;
+  font-size: 1.25em;
+  position: relative;
+  top: 12px; }
+
+.resource-rate {
+  padding-right: 6px;
+  font-size: .9em;
+  letter-spacing: 1px;
+  font-weight: 700;
+  line-height: 20px;
+  position: absolute;
+  right: 30px; }
+
+.resource-capacity {
+  font-weight: 700;
+  letter-spacing: 1px; }
+
+.resource-time {
+  font-size: .85em;
+  padding-top: 3px;
+  position: absolute;
+  right: 32px; }
 
 /*# sourceMappingURL=cat.css.map */

@@ -17,34 +17,52 @@
 				<div class="container-inner">
 					<div class="row">
 						<div class="col-md-4">
-							<a class="btn btn-primary btn-block" id="cat" onClick="cookieClick(1)" href="#">Pet Cat</a>
-						</div>
-						<div class="col-md-4 col-md-offset-4">
-							<h3>Cats</h3>
-							<h1 id="catCounter">0</h1>
-						</div>
-					</div>
 
-					<div class="row">
-						<div class="col-md-4">
-							<h3>Upgrades</h3>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<strong>Yarn Balls x <span id="yarnBallNum">0</span></strong>
-									<a class="btn btn-success pull-right" id="cat" onClick="buyUpgrade('yarnBall')" href="#">Cost: <span id="yarnBallCost">10</span></a>
-								</div>
+							<div id="food" class="panel panel-default" data-resource="Frisky Bits">
 								<div class="panel-body">
-									Yarn Balls are fun and fluffy
-									<a class="btn btn-warning pull-right" href="#">Upgrades</a>
-								</div>
-								<div class="panel-footer">
+									<span class="resource-title">Frisky Bits</span>
+									<a class="btn btn-warning btn-xs pull-right resource-btn" href="#">Gather</a>
 									<div class="progress">
-  										<div id="yarnBallProgress" class="progress-bar" role="progressbar"  style="width: 0%;">
-   									
+  										<div class="progress-bar progress-bar-warning resource-bar" role="progressbar"  >
   										</div>
+  										<span class="resource-rate">0/sec</span>
 									</div>
+									<span class="pull-left resource-capacity">0/200</span>
+									<span class="pull-right resource-time">Infinity</span>
 								</div>
 							</div>
+
+							<div id="fish" class="panel panel-default" data-resource="Fresh Fish">
+								<div class="panel-body">
+									<span class="resource-title">Fresh Fish</span>
+									<a class="btn btn-primary btn-xs pull-right resource-btn" href="#">Gather</a>
+									<div class="progress">
+  										<div class="progress-bar progress-bar-primary resource-bar" role="progressbar"  >
+  										</div>
+  										<span class="resource-rate">0/sec</span>
+									</div>
+									<span class="pull-left resource-capacity">0/100</span>
+									<span class="pull-right resource-time">Infinity</span>
+								</div>
+							</div>
+
+							<div id="herb" class="panel panel-default" data-resource="Catnip">
+								<div class="panel-body">
+									<span class="resource-title">Catnip</span>
+									<a class="btn btn-success btn-xs pull-right resource-btn" href="#">Gather</a>
+									<div class="progress">
+  										<div class="progress-bar progress-bar-success resource-bar" role="progressbar"  >
+  										</div>
+  										<span class="resource-rate">0/sec</span>
+									</div>
+									<span class="pull-left resource-capacity">0/10</span>
+									<span class="pull-right resource-time">Infinity</span>
+								</div>
+							</div>
+
+
+
+
 						</div>
 						<div class="col-md-4 col-md-offset-4">
 							
