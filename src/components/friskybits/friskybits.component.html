@@ -1,0 +1,7 @@
+<ion-card>
+	<ion-card-header>{{ friskybits.name }}</ion-card-header>
+	<ion-card-content>
+		{{friskybits.cur }} / {{ friskybits.max }}
+	</ion-card-content>
+	<button ion-button color="primary" block (click)="count(friskybits.inc)">Gather</button>
+</ion-card>

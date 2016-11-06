@@ -8,6 +8,11 @@ import { AboutPage }             from '../pages/about/about';
 import { ContactPage }           from '../pages/contact/contact';
 import { HomePage }              from '../pages/home/home';
 
+/* COMPONENTS */
+import { FriskyBits }            from '../components/friskybits/friskybits.component';
+
+/* PROVIDERS */
+import { Resource }              from '../providers/resource/resource.provider';
 
 @NgModule({
   declarations: [
@@ -15,7 +20,8 @@ import { HomePage }              from '../pages/home/home';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    FriskyBits,
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -26,8 +32,11 @@ import { HomePage }              from '../pages/home/home';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    FriskyBits,
   ],
-  providers: []
+  providers: [
+    Resource,
+  ]
 })
 export class AppModule {}
