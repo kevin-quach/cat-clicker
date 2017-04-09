@@ -1,18 +1,15 @@
-import { NgModule }              from '@angular/core';
-import { IonicApp, IonicModule } from 'ionic-angular';
-import { MyApp }                 from './app.component';
-import { TabsPage }              from '../pages/tabs/tabs';
+import { NgModule, ErrorHandler } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { MyApp } from './app.component';
 
-/* PAGES */
-import { AboutPage }             from '../pages/about/about';
-import { ContactPage }           from '../pages/contact/contact';
-import { HomePage }              from '../pages/home/home';
+import { AboutPage } from '../pages/about/about';
+import { ContactPage } from '../pages/contact/contact';
+import { HomePage } from '../pages/home/home';
+import { TabsPage } from '../pages/tabs/tabs';
 
-/* COMPONENTS */
-import { FriskyBits }            from '../components/friskybits/friskybits.component';
-
-/* PROVIDERS */
-import { Resource }              from '../providers/resource/resource.provider';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 @NgModule({
   declarations: [
@@ -20,10 +17,10 @@ import { Resource }              from '../providers/resource/resource.provider';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage,
-    FriskyBits,
+    TabsPage
   ],
   imports: [
+    BrowserModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -32,11 +29,12 @@ import { Resource }              from '../providers/resource/resource.provider';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage,
-    FriskyBits,
+    TabsPage
   ],
   providers: [
-    Resource,
+    StatusBar,
+    SplashScreen,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}
